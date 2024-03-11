@@ -1,9 +1,10 @@
 import numpy as np
 import functions
 
-def check_initial_rankings(x,matches,gamesplayed,nmatches=7):
-    r"""
 
+def check_initial_rankings(x, matches, gamesplayed, nmatches=7):
+    r"""
+    Calculates the values of the residuals for given initial Elo values. To be used by scipy.optimize.least_squares
     :param x: initial rankings of teams sorted by TeamID
     :param nmatches: number of matches considered for the fit
     :param matches: DataFrame with matches
@@ -19,7 +20,7 @@ def check_initial_rankings(x,matches,gamesplayed,nmatches=7):
     residuals = []
 
     # go through all matches
-    for ir,row in matches.iterrows():
+    for ir, row in matches.iterrows():
         # get data
         t1id = int(row['T1ID'])
         t2id = int(row['T2ID'])
@@ -43,7 +44,7 @@ def check_initial_rankings(x,matches,gamesplayed,nmatches=7):
             elo1 = x[ix1]
             elo2 = x[ix2]
             # Get win probabilities
-            we1, we2 = functions.win_probability(elo1,elo2)
+            we1, we2 = functions.win_probability(elo1, elo2)
 
             # Append residuals
             if b1:
@@ -52,19 +53,20 @@ def check_initial_rankings(x,matches,gamesplayed,nmatches=7):
                 residuals.append(w2-we2)
 
     # reset gamesplayed
-    for id in teamids:
-        gamesplayed[id] = 0
+    for iid in teamids:
+        gamesplayed[iid] = 0
     return np.array(residuals)
 
-def check_predictions_for_k(x, matches, inittype = 'initial', initial_elos = None, leagues = None):
-    r"""
 
+def check_predictions_for_k(x, matches, inittype='initial', initial_elos=None, leagues=None):
+    r"""
+    Calculates the values of the residuals for given k and h. To be used by scipy.optimize.least_squares
     :param x: Parameters to be optimized. x[0]...k, x[1]...home advantage
-    :param matches: DataFrame with matches
+    :param matches: DataFrame with leagues
     :param inittype: Type of setting the initial Elos. 'initial'...from optimized initial Elos
                                                    'firstmatch'...from the level of the league of the first match
     :param initial_elos: Initial Elos
-    :param matches: DataFrame with leagues
+    :param leagues: DataFrame with leagues
     :return: residuals...array with the residuals
     """
     residuals = []
@@ -86,7 +88,8 @@ def check_predictions_for_k(x, matches, inittype = 'initial', initial_elos = Non
         gs1 = row['GT1']
         gs2 = row['GT2']
         # handle teams in elovstime
-        gp1, gp2, elo1, elo2, elovstime = functions.handle_teams_in_elovstime(t1id,t2id,elovstime,inittype,initial_elos=initial_elos,level=level)
+        gp1, gp2, elo1, elo2, elovstime = functions.handle_teams_in_elovstime(t1id, t2id, elovstime, inittype,
+                                                                              initial_elos=initial_elos, level=level)
         # calculate new elos
         nelo1, nelo2 = functions.calculate_elos(elo1, elo2, gp1, gp2, gs1, gs2, k=k, h=h)
         # append new data
@@ -103,15 +106,17 @@ def check_predictions_for_k(x, matches, inittype = 'initial', initial_elos = Non
 
     return np.array(residuals)
 
-def cost_for_k_h(k,h, matches, inittype = 'initial', initial_elos = None, leagues = None):
-    r"""
 
-    :param x: Parameters to be optimized. x[0]...k, x[1]...home advantage
+def cost_for_k_h(k, h, matches, inittype='initial', initial_elos=None, leagues=None):
+    r"""
+    Calculates the value of the cost function for given k and h
+    :param k: k-parameter
+    :param h: home advantage
     :param matches: DataFrame with matches
     :param inittype: Type of setting the initial Elos. 'initial'...from optimized initial Elos
-                                                   'firstmatch'...from the level of the league of the first match
+                                                       'firstmatch'...from the level of the league of the first match
     :param initial_elos: Initial Elos
-    :param matches: DataFrame with leagues
+    :param leagues: DataFrame with leagues
     :return: cost...value of the cost function
     """
     residuals = []
@@ -131,7 +136,8 @@ def cost_for_k_h(k,h, matches, inittype = 'initial', initial_elos = None, league
         gs1 = row['GT1']
         gs2 = row['GT2']
         # handle teams in elovstime
-        gp1, gp2, elo1, elo2, elovstime = functions.handle_teams_in_elovstime(t1id,t2id,elovstime,inittype,initial_elos=initial_elos,level=level)
+        gp1, gp2, elo1, elo2, elovstime = functions.handle_teams_in_elovstime(t1id, t2id, elovstime, inittype,
+                                                                              initial_elos=initial_elos, level=level)
         # calculate new elos
         nelo1, nelo2 = functions.calculate_elos(elo1, elo2, gp1, gp2, gs1, gs2, k=k, h=h)
         # append new data
