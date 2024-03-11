@@ -10,6 +10,7 @@ Calculation of Floorball Elo values for all German teams (currently only Herren 
 - *functions.py* - includes basic functions used by other scripts
 - *plot_elo_1buli.py* - plots Elo values for teams which participated in 1. BuLi in 21/22
 - *plot_elo_2buli.py* - plots Elo values for teams which participated in 2. BuLi in 21/22
+- *update_hgf_teamsmain.ipynb* - Jupyter notebook for updating the databases in case some teams have to be merged or separated. First update clean_data/hgf_teams.csv manually and then run *update_hgf_teamsmain.ipynb* to update everything else
 
 # Formalism
 - Calculation of the win probabilities `we1` and `we2` from `elo1` and `elo2`, assuming home advantage `h`: 

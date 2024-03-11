@@ -2,6 +2,8 @@
 https://archiv.saisonmanager.de/
 
 - *hgf_leagues.csv* - table of leagues (HGF - Herren Großfeld), indicating level (1: 1. Bundesliga, 2: 2. Bundesliga / Pokal / some Qualifications, 3: Regionalliga / Verbandsliga)
+ 
+- *hgf_matches.csv* - time-ordered table of all HGF matches (seasons 14/15 to 21/22), with TeamIDs
 
 - *hgf_matches_ordered.csv* - time-ordered table of all HGF matches (seasons 14/15 to 21/22), with TeamIDs
 
