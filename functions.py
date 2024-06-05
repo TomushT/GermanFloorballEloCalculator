@@ -126,16 +126,32 @@ def handle_date(dates, date):
     return idate, dates
 
 
-def handle_league(league, leagues):
+def handle_league(league_id, leagues):
     r"""
-    Finds the level of league.
-    :param league: Investigated league.
-    :param leagues: DataFrame of leagues.
+    finds the level of league.
+    :param league_id: investigated league.
+    :param leagues: dataframe of leagues.
     :return: level
     """
-    leaguerow = leagues[leagues['LeagueName'] == league]
-    level = leaguerow['Level'].values
+    leaguerow = leagues[leagues['id'] == league_id]
+    level = leaguerow['level'].values
     return level
+
+
+
+def handle_teams(team1, team2, teams):
+    r"""
+    finds team IDs.
+    :param team1: Team 1.
+    :param team2: Team 2.
+    :param teams: dataframe of teams.
+    :return: t1id, t2id
+    """
+    t1row = teams[teams['OrigName'] == team1]
+    t2row = teams[teams['OrigName'] == team2]
+    t1id = int(t1row['TeamID'].values)
+    t2id = int(t2row['TeamID'].values)
+    return t1id, t2id
 
 
 def initial_elo_from_level(level):
@@ -147,9 +163,11 @@ def initial_elo_from_level(level):
     if level == 1:
         elo = 2000
     elif level == 2:
-        elo = 1500
-    elif level == 3:
         elo = 1000
+    elif level == 12:
+        elo = 1500
+    else:
+        print("League level not defined:", level)
     return elo
 
 

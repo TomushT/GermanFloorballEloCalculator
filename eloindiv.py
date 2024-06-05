@@ -2,16 +2,16 @@ import functions
 import json
 
 pathtoresults = "results/dataset1/"
-pathtodata = "clean_data/"
+pathtodata = "data_from_sm/"
 
 # import data
-teams = functions.initialize_teams(pathtodata+"hgf_teamsmain.csv")
+teams = functions.initialize_teams(pathtodata+"v2_teams_floorball_deutschland_hgf_buli.csv")
 with open(pathtoresults+"elovstime.json", "r") as file:
     elovstime = json.load(file)
 with open(pathtoresults+"dates.json", "r") as file:
     dates = json.load(file)
 
-teamid = 97
+teamid = 23
 teamname, dateids, elos = functions.get_elos_team(teamid, elovstime, teams)
 print(f'{teamname}')
 for idateid, dateid in enumerate(dateids):
