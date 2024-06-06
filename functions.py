@@ -27,7 +27,7 @@ def win_probability(elo1, elo2, h=10):
     Calculates the win probabilities for a given pair of Elos.
     :param elo1: Elo of Team 1 (home).
     :param elo2: Elo of Team 2 (away).
-    :param h:  Home advantage (def.: 100).
+    :param h:  Home advantage (def.: 10).
     :return: we1...Win probability of Team 1
              we2...Win probability of Team 2
     """
@@ -49,8 +49,8 @@ def calculate_elos(elo1, elo2, gp1, gp2, gs1, gs2, k=62, h=10, ktresh=10):
     :param gs1: Goals scored by Team 1.
     :param gs2: Goals scored by Team 2.
     :param k: k parameter
-    :param h: Home advantage (def.: 100).
-    :param ktresh: Treshold for the K parameter (def.: 7).
+    :param h: Home advantage (def.: 10).
+    :param ktresh: Treshold for the K parameter (def.: 10).
     :return: nelo1...new Elo of Team 1
              nelo2...new Elo of Team 2
     """
@@ -178,7 +178,8 @@ def handle_teams_in_elovstime(t1id, t2id, elovstime, inittype='initial', initial
     :param t2id: Team2 ID
     :param elovstime: Dictionary with Elo for all teams
     :param inittype: Type of setting the initial Elos. 'initial'...from optimized initial Elos
-                                                   'firstmatch'...from the level of the league of the first match
+                                                       'firstmatch'...from the level of the league of the first match
+                                                       'identical'...identical for all teams (1000)
     :param initial_elos: List with TeamIDs and initial Elos.
     :param level: Level of the league of the current match.
     :return:gp1...Games played by Team1,
@@ -193,6 +194,8 @@ def handle_teams_in_elovstime(t1id, t2id, elovstime, inittype='initial', initial
         gp1 = 0
         if inittype == 'firstmatch':
             elo1 = initial_elo_from_level(level)
+        elif inittype == 'constant':
+            elo1 = 1000
         elif inittype == 'initial':
             for pair in initial_elos:
                 if pair[0] == t1id:
@@ -207,6 +210,8 @@ def handle_teams_in_elovstime(t1id, t2id, elovstime, inittype='initial', initial
         gp2 = 0
         if inittype == 'firstmatch':
             elo2 = initial_elo_from_level(level)
+        elif inittype == 'constant':
+            elo2 = 1000
         elif inittype == 'initial':
             for pair in initial_elos:
                 if pair[0] == t2id:
