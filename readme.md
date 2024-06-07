@@ -12,10 +12,10 @@ Support with data extraction by Joshua Reibert (https://github.com/joshuarrrrr).
 - *plot_elo_1buli.py* - plots Elo values for teams which participated in 1. BuLi only
 - *plot_elo_2buli.py* - plots Elo values for teams which participated in 2. BuLi only
 - *update_hgf_teamsmain.ipynb* - Jupyter notebook for updating the databases in case some teams have to be merged or separated. First update clean_data/hgf_teams.csv manually and then run *update_hgf_teamsmain.ipynb* to update everything else
-- *data_loading/load_matches_josh.ipynb* Jupyter notebook for loading the data from the API of https://saisonmanager.de/
-- *data_from_sm* includes the data extracted from the https://saisonmanager.de/
-- *results* includes the results, see readme.md in the directory
-- *old_version* includes old version of the code, which used https://archiv.saisonmanager.de/ and was only valid until season 21/2
+- *data_loading/load_matches_josh.ipynb* - Jupyter notebook for loading the data from the API of https://saisonmanager.de/
+- *data_from_sm* - includes the data extracted from the https://saisonmanager.de/
+- *results* - includes the results, see readme.md in the directory
+- *old_version* - includes old version of the code, which used https://archiv.saisonmanager.de/ and was only valid until season 21/22
 
 # Formalism
 - Calculation of the win probabilities `we1` and `we2` from `elo1` and `elo2`, assuming home advantage `h`: 
