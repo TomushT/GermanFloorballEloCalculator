@@ -34,12 +34,12 @@ def win_probability(elo1, elo2, h=10):
 
     # win probability
     we1 = 1.0/(10**(-(elo1-elo2+h)/400)+1)
-    we2 = 1.0/(10**(-(elo2-elo1)/400)+1)
+    we2 = 1.0/(10**(-(elo2-elo1-h)/400)+1)
 
     return we1, we2
 
 
-def calculate_elos(elo1, elo2, gp1, gp2, gs1, gs2, k=62, h=10, ktresh=10):
+def calculate_elos(elo1, elo2, gp1, gp2, gs1, gs2, k=60, h=70, ktresh=7):
     r"""
     Calculates the new Elos.
     :param elo1: Elo of Team 1 (home).
@@ -48,9 +48,9 @@ def calculate_elos(elo1, elo2, gp1, gp2, gs1, gs2, k=62, h=10, ktresh=10):
     :param gp2: Games played by Team 2.
     :param gs1: Goals scored by Team 1.
     :param gs2: Goals scored by Team 2.
-    :param k: k parameter
-    :param h: Home advantage (def.: 10).
-    :param ktresh: Treshold for the K parameter (def.: 10).
+    :param k: k parameter (def.: 60).
+    :param h: Home advantage (def.: 70).
+    :param ktresh: Treshold for the K parameter (def.: 7).
     :return: nelo1...new Elo of Team 1
              nelo2...new Elo of Team 2
     """
@@ -64,14 +64,14 @@ def calculate_elos(elo1, elo2, gp1, gp2, gs1, gs2, k=62, h=10, ktresh=10):
         k1 = k
         k2 = k
     elif gp1 <= ktresh < gp2:
-        k1 = 5*k
+        k1 = 2*k
         k2 = 0.5*k
     elif gp1 > ktresh >= gp2:
         k1 = 0.5*k
-        k2 = 5*k
+        k2 = 2*k
     elif gp1 <= ktresh and gp2 <= ktresh:
-        k1 = 5*k
-        k2 = 5*k
+        k1 = 2*k
+        k2 = 2*k
     # points from actual match
     w1, w2 = get_result(gs1, gs2)
     # win probability

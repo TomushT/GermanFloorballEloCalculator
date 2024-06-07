@@ -7,7 +7,7 @@ import matplotlib.dates as mdates
 import datetime as dt
 
 # import data
-pathtoresults = "results/dataset2/"
+pathtoresults = "results/dataset5/"
 pathtodata = "data_from_sm/"
 
 # parameters
@@ -48,7 +48,7 @@ for i, teamid in enumerate(elovstime):
 ax.set_xlabel("Datum")
 ax.set_ylabel("Elo Punkte")
 
-ax.set_ylim(100, 2000)
+ax.set_ylim(1400, 2750)
 
 plt.title("Teams aus der 1. Bundesliga 2015-2024")
 
