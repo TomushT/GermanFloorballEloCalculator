@@ -21,7 +21,7 @@ Support with data extraction by Joshua Reibert (https://github.com/joshuarrrrr).
 - Calculation of the win probabilities `we1` and `we2` from `elo1` and `elo2`, assuming home advantage `h`: 
 ```python
 we1 = 1.0/(10**(-(elo1-elo2+h)/400)+1)
-we2 = 1.0/(10**(-(elo2-elo1-4)/400)+1)
+we2 = 1.0/(10**(-(elo2-elo1-h)/400)+1)
 ```
 - New Elo values for the observed result `w1` and `w2`:
 ```python
