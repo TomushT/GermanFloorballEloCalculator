@@ -6,7 +6,7 @@ Support with data extraction by Joshua Reibert (https://github.com/joshuarrrrr).
 - *eloindiv.py* - prints Elo values for an individual team (assuming Elo values were already calculated with *calculate_elo.py*)
 - *find_initial_ratings.py* - estimates initial Elo ratings by minimizing the squared differences between the estimated and observed win probabilities, see https://opisthokonta.net/?p=1387 and https://opisthokonta.net/?p=1412
 - *find_k_homeadv.py* - calculates the values of the cost function (sum of the squared differences between the estimated and observed win probabilities) for varying values of the k parameter and the home advantage, looking for the minimum of the cost function
-- *find_k_homeadv_leastsquares.py* - minimizes the cost function to find optimal values of k and the home advantage with least squares minimization (scipy). Does not give any good results in the moment.
+- *find_k_homeadv_leastsquares.py* - minimizes the cost function to find optimal values of k and the home advantage with least squares minimization (scipy). Does not work properly in the moment. It finds the optimal home advantage, but does not minimize `k` (zero gradient). Reason is unknown.
 - *fitting.py* - includes functions used to obtain optimal parameters (initial Elo values, k, and home advantage)
 - *functions.py* - includes basic functions used by other scripts
 - *plot_elo_1buli.py* - plots Elo values for teams which participated in 1. BuLi only

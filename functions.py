@@ -138,7 +138,6 @@ def handle_league(league_id, leagues):
     return level
 
 
-
 def handle_teams(team1, team2, teams):
     r"""
     finds team IDs.
