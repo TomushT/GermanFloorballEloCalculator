@@ -15,6 +15,7 @@ Support with data extraction by Joshua Reibert (https://github.com/joshuarrrrr).
 - *data_loading/load_matches_josh.ipynb* - Jupyter notebook for loading the data from the API of https://saisonmanager.de/
 - *data_from_sm* - includes the data extracted from the https://saisonmanager.de/
 - *results* - includes the results, see readme.md in the directory
+- *special_stats* - notebooks etc. to get individual player statistics, see readme.md in the directory
 - *old_version* - includes old version of the code, which used https://archiv.saisonmanager.de/ and was only valid until season 21/22
 
 # Formalism
